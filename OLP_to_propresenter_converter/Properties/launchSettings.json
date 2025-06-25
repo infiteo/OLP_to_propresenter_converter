@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "OLP_to_propresenter_converter": {
+      "commandName": "Project",
+      "commandLineArgs": "./input_folder ./output_folder",
+      "workingDirectory": "C:\\Users\\infan\\source\\repos\\OLP_to_propresenter_converter\\OLP_to_propresenter_converter"
+    }
+  }
+}
