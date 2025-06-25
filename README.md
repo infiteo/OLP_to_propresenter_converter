@@ -1,27 +1,51 @@
-﻿# OpenLP to ProPresenter Converter
+# OpenLP to ProPresenter Converter
 
-This tool converts worship songs exported from OpenLP (in OpenLyrics `.xml` format) into files compatible with ProPresenter 7.
+This tool is written in **C# using .NET 8**, and converts worship songs exported from OpenLP (in OpenLyrics `.xml` format) into files compatible with ProPresenter 7.
 
 ## 📥 How to Use
 
-1. **Export Songs from OpenLP**  
+### Option 1: Use the prebuilt executables
+
+Compiled executables for supported platforms are available in the `release/` directory. You can run them directly without installing .NET.
+
+#### Windows:
+
+```bash
+OlpToProConverter.exe input_folder output_folder
+```
+
+#### Linux:
+
+Before running the file, make it executable:
+
+```bash
+chmod +x OlpToProConverter
+./OlpToProConverter input_folder output_folder
+```
+
+#### macOS:
+
+🚧 **Work in progress** – macOS builds are not yet available. Stay tuned or build manually from source on a Mac.
+
+### Option 2: Build from source
+
+1. **Export Songs from OpenLP**
    In OpenLP, go to **File > Export > Songs** and choose the **OpenLyrics (.xml)** format.
 
-2. **Place Files in Input Folder**  
+2. **Place Files in Input Folder**
    Move all `.xml` files into the `input_folder`.
 
-3. **Run the Converter**  
-   Execute the script with:
+3. **Run the Converter with .NET SDK**
 
-   ```bash
-   python3 converter.py input_folder output_folder
-   ```
+```bash
+dotnet run --project OlpToProConverter.csproj -- input_folder output_folder
+```
 
-   The converted `.pro` files will be saved in the `output_folder`.
+The converted `.pro` files will be saved in the `output_folder`.
 
 ## 📄 Output Format
 
-Each `.pro` file will contain verses labeled as `[Verse 1]`, `[Verse 2]`, etc., following the `<verseOrder>` defined in the original XML.  
+Each `.pro` file will contain verses labeled as `[Verse 1]`, `[Verse 2]`, etc., following the `<verseOrder>` defined in the original XML.
 If no `<verseOrder>` is specified, a default order will be generated automatically based on the appearance of the verses.
 
 ### Example Output:
@@ -61,6 +85,20 @@ che a Te si spande, Padre d'amor.
 5. Confirm the import.
 
 Your songs will now appear in the ProPresenter library, ready to be added to any playlist or service.
+
+## 📍 Platform Support
+
+The project is cross-platform and can be compiled for:
+
+* ✅ Windows (executables provided)
+* ✅ Linux (executables provided)
+* 🚧 macOS – Work in progress (build manually from macOS or use CI/CD)
+
+To build from source for another OS, use:
+
+```bash
+dotnet publish -c Release -r <RID> --self-contained true /p:PublishSingleFile=true /p:PublishTrimmed=false
+```
 
 ---
 
